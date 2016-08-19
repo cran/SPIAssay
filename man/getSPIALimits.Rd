@@ -23,7 +23,7 @@ A list with three elements:\cr
  1. inferior limit \cr
  2. superior limit \cr
  3. error signal}
-\author{Francesca Demichelis <demichelis@science.unitn.it>, Davide Prandi <prandi@science.unitn.it>}
+\author{Francesca Demichelis <francesca.demichelis@unitn.it>, Davide Prandi <davide.prandi@unitn.it>}
 
 \keyword{internal}
 

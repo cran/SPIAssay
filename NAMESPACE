@@ -1,1 +1,2 @@
-export (SPIAPlot, SPIATest, toSPIAData )
+exportPattern("^[[:alpha:]]+")
+importFrom("graphics", "legend", "par", "plot", "points")

@@ -7,12 +7,14 @@
 #
 #############################################################################
 
+
+
 SPIAPlot <- function(SPIAanalysis){  
   
   #set parameters
   par(mfrow=c(1,1),cex=0.8,font=1,col.main="skyblue4",mai=c(1, 0.8, 0.3, 0.1))
   titleplot<-paste("Pair-wise comparison of ", SPIAanalysis$input.param$N_samples," samples on ", SPIAanalysis$input.param$N_SNPs, " SNPs",sep="")  
-  plot(1:10,xlim=c(0,dim(SPIAanalysis$SPIAresult)[1]),ylim=c(0,1),ylab="Distance D (% of discordant genotype calls)",xlab="Index of Cell Line pairs (all combinations)",main=titleplot,col="white" ,cex=0.1);  
+  plot(1:10,xlim=c(0,dim(SPIAanalysis$SPIAresult)[1]),ylim=c(0,1),ylab="Distance D (% of discordant genotype calls)",xlab="Index of Sample pairs (all combinations)",main=titleplot,col="white" ,cex=0.1);  
 
   #check if the SPIAanalysis contain the probabilistic test
   if (SPIAanalysis$input.param$testDone)

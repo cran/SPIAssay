@@ -24,14 +24,14 @@ ComputingSPIADistance<-function(vector1, vector2, defaultDigists = 5, verbose = 
     return(-1)
     }  
   
-   vector1 <- factor(vector1)
-   vector2 <- factor(vector2)
-   levels(vector1) <- c(0,1,2)
-   levels(vector2) <- c(0,1,2)
+   vector1 <- factor(vector1,levels=seq(0,2,1))
+   vector2 <- factor(vector2,levels=seq(0,2,1))
+   #levels(vector1) <- c(0,1,2)
+   #levels(vector2) <- c(0,1,2)
   
   ##Build contingency table of vector1 and vector2
-  SummaryTable<-table(vector1,vector2,exclude=NULL);
-  
+  ## SummaryTable<-table(vector1,vector2,exclude=NULL); ## corrected after R-2.8.0
+  SummaryTable <- table(vector1,vector2,useNA = "always");
   lenVet<-length(vector1);
 
   ##COMPUTATION START
@@ -39,34 +39,34 @@ ComputingSPIADistance<-function(vector1, vector2, defaultDigists = 5, verbose = 
        
   ##Both SNPs are not available
   counterBothNA <- SummaryTable[4,4]
-  if (verbose) {message("SPIA: number of calls where both SNPs are not available:",counterBothNA,"\n") }
+  if (verbose) {message("SPIA: number of calls where both SNPs are not available: ",counterBothNA,"") }
   
   ##One of the two SPNs are not available
   counterOneNA <- sum(SummaryTable[4,c(1:3)], SummaryTable[c(1:3),4])
-  if (verbose) {message("SPIA: number of calls where one of the two SNPs are not available:",counterOneNA,"\n") }
+  if (verbose) {message("SPIA: number of calls where one of the two SNPs are not available: ",counterOneNA,"") }
   
   ##From AA to BB or from BB to AA
   counterDiffAvsBorBvsA <- SummaryTable["1","0"]+SummaryTable["0","1"]
-  if (verbose) {message("SPIA: number of calls where AA becomes BB or BB becomes AA:",counterDiffAvsBorBvsA,"\n") }
+  if (verbose) {message("SPIA: number of calls where AA becomes BB or BB becomes AA: ",counterDiffAvsBorBvsA,"") }
   
   ##From {AA,BB} to AB or from AB to {AA,BB}
   counterDiffAorBvsABorviceversa <- SummaryTable["2","0"]+
                                     SummaryTable["2","1"]+
                                     SummaryTable["0","2"]+
                                     SummaryTable["1","2"]
-  if (verbose) {message("SPIA: number of calls where AA or BB become AB or vice versa:",counterDiffAorBvsABorviceversa,"\n") }                                    
+  if (verbose) {message("SPIA: number of calls where AA or BB become AB or vice versa: ",counterDiffAorBvsABorviceversa,"") }                                    
 
   ##From {AA,BB} to AB
   counterDiffABvsAorB <- SummaryTable["0","2"] + SummaryTable["1","2"]
-  if (verbose) {message("SPIA: number of calls where AA or BB become AB:",counterDiffABvsAorB,"\n") }
+  if (verbose) {message("SPIA: number of calls where AA or BB become AB: ",counterDiffABvsAorB,"") }
   
   ##Both SNPs are Homozygous
   counterBothHomoz <- SummaryTable["0","0"] + SummaryTable["1","1"]
-  if (verbose) {message("SPIA: number of calls where both SNPs are homozygous:",counterBothHomoz,"\n") }
+  if (verbose) {message("SPIA: number of calls where both SNPs are homozygous: ",counterBothHomoz,"") }
 
   ##Both SNPs are Hetherozygous
   counterBothHeter<-SummaryTable["2","2"]
-  if (verbose) {message("SPIA: number of calls where both SNPs are heterozygous:",counterBothHeter,"\n") }
+  if (verbose) {message("SPIA: number of calls where both SNPs are heterozygous: ",counterBothHeter,"") }
 
   ##Computing SPIA Distance
   somma<-counterDiffAorBvsABorviceversa+counterDiffAvsBorBvsA

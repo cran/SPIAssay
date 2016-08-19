@@ -13,7 +13,7 @@ enough to be called similar and when they are not.
 \tabular{ll}{
 Package: \tab SPIAssay\cr
 Type: \tab Package\cr
-Version: \tab 1.0.0\cr
+Version: \tab 1.1.0\cr
 Date: \tab 2011-07-26\cr
 License: \tab GPL Version 2 or later.\cr
 }
@@ -23,10 +23,9 @@ on a set of cell lines and perform the associated probabilistic test. Another im
 \code{SPIAPlot} that creates a summary graph of the SPIA test. Finally, \code{toSPIAData} function
 encodes generic representations of genotype calls into a format compatible with SPIA.
 }
-\author{
-Francesca Demichelis <demichelis@science.unitn.it>, Davide Prandi <prandi@science.unitn.it>
+\author{Francesca Demichelis <francesca.demichelis@unitn.it>, Davide Prandi <davide.prandi@unitn.it>
 
-Maintainer: Davide Prandi <prandi@science.unitn.it>
+Maintainer: Davide Prandi <davide.prandi@unitn.it>
 
 }
 \references{
@@ -50,7 +49,8 @@ c("SNP2", "NoCall", "AA", "AB", "AB"),
 c("SNP3", "AB", "AB", "AA" , "AB"),
 c("SNP4", "BB", "BB", "BB", "BB"),
 c("SNP5", "AB", "BB", "AA", "AA"))
-colnames(GenotypeCalls) <- c("SNP_ID","CellLine1","CellLine2","CellLine3","CellLine4")
+colnames(GenotypeCalls) <- 
+ c("SNP_ID","CellLine1","CellLine2","CellLine3","CellLine4")
 
 # Encode the data into SPIA format.
 # SPIA uses 0 for AA, 1 for BB, 2 for AB, and NA for NoCall
@@ -59,8 +59,10 @@ encoding <- c("AA","BB","AB","NoCall")
 SPIAGenotypeCalls <- toSPIAData(GenotypeCalls,encoding)
 
 # Perform SPIA analysis with parameters SPIAParam
-SPIAParam <- list(Pmm = 0.1, nsigma = 1, Pmm_nonM = 0.6, nsigma_nonM = 1, PercValidCall=0.7)
-SPIAanalysis <- SPIATest(SPIAGenotypeCalls, row.names = TRUE, test.prob = TRUE, SPIAParam)
+SPIAParam <- 
+ list(Pmm=0.1, nsigma=1, Pmm_nonM=0.6, nsigma_nonM=1, PercValidCall=0.7)
+SPIAanalysis <- 
+ SPIATest(SPIAGenotypeCalls, row.names=TRUE, test.prob=TRUE, SPIAParam)
 
 # Plot SPIA pairwise comparison
 SPIAPlot(SPIAanalysis)

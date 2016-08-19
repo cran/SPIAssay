@@ -76,7 +76,7 @@ SPIATest<-function (x, row.names = TRUE, test.prob = TRUE,
   for(i in (1:(Nc-1))){  
     for(j in ((i+1):Nc)){                 
         #Compute distance and other information for the cell i vs cell j
-        dist<-ComputingSPIADistance(x[,i],x[,j]);
+        dist<-ComputingSPIADistance(vector1=x[,i],vector2=x[,j],verbose=verbose);
         
         #Save the result in result and increment counter        
         result[(counter+1),1] <- CLnames[i]
